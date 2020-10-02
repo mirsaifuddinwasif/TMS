@@ -1,0 +1,16 @@
+HAZRAT GEE TAILOR SHOP
+
+A simple web portal is required for a tailor shop to manage their customer job.
+
+1.	Login user to web.
+2.	View and update the user profile
+3.	Add & Update customer information for requested Suit
+4.	Create a Customer Receipt to print
+5.	View customer information
+6.	Keep the status of customer job (Requested, Done, Delivered)
+7.	Send Customer Receipt on Email Notification.
+
+Priorities:
+High: 3, 4, 5, 6
+Medium: 1, 2
+Low: 7
