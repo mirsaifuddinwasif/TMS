@@ -20,11 +20,11 @@ connection.once('open', function () {
 })
 
 cloth_measurementRoutes.route('/').get(function (req, res) {
-    cloth_pant_model.find(function (err, cloth_measurement) {
+    cloth_coat_model.find(function (err, cloth_coat_model) {
         if (err) {
             console.log(err);
         } else {
-            res.json(cloth_measurement);
+            res.json(cloth_coat_model);
         }
     });
 });

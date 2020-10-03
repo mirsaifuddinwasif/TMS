@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import Calendar from 'react-calendar';
 import MeasurementInput from './measurement-input';
 
 export default class CreateMeasurement extends Component {
@@ -45,6 +46,7 @@ export default class CreateMeasurement extends Component {
         }
 
         this.state = {
+            calendarDate: new Date(),
             name: '',
             date: new Date().toISOString().split('T')[0],
             jobId: '',
@@ -92,6 +94,20 @@ export default class CreateMeasurement extends Component {
         }
     }
 
+    addName(e) {
+        this.setState({
+            name: e.target.value
+        })
+    }
+
+    addContact(e) {
+        this.setState({
+            contact: e.target.value
+        })
+    }
+
+    onDeliveryDateChange = deliveryDate => this.setState({deliveryDate})
+
     onChangeClothType(e) {
         this.setState({
             clothType: e.target.value
@@ -107,7 +123,12 @@ export default class CreateMeasurement extends Component {
     onSubmit(e) {
         e.preventDefault();
         let data = {};
+        data['name'] = this.state.name;
+        data['contact'] = this.state.contact;
+        data['deliveryDate'] = this.state.deliveryDate.toISOString().split('T')[0];
+        data['date'] = new Date().toISOString().split('T')[0];
         this.measurements[this.state.clothType].forEach(m => data[m.key] = this.state[m.key]);
+
         console.log(data); // This is your final data to set
 
         console.log(`Form submitted:`);
@@ -129,6 +150,32 @@ export default class CreateMeasurement extends Component {
         return (
             <div style={{marginTop: 10}}>
                 <h3>Get you Measured 'All In Inches'</h3>
+
+                <div className="form-group">
+                    <label>Name: </label>
+                    <input type="text"
+                           className="form-control"
+                           value={this.state.name}
+                           onChange={this.addName.bind(this)}
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label>Contact No: </label>
+                    <input type="text"
+                           className="form-control"
+                           value={this.state.contact}
+                           onChange={this.addContact.bind(this)}
+                    />
+                </div>
+
+
+                <div className="form-group">
+                    <Calendar
+                        onChange={this.onDeliveryDateChange}
+                        value={this.state.calendarDate}
+                    />
+                </div>
 
                 <div className="form-group">
                     <label>Dressing type: </label>
