@@ -106,7 +106,16 @@ export default class CreateMeasurement extends Component {
         })
     }
 
-    onDeliveryDateChange = deliveryDate => this.setState({deliveryDate})
+    // For saif:
+    // Extreme short hand: onDeliveryDateChange = deliveryDate => this.setState({deliveryDate})
+    // With Brackets: onDeliveryDateChange = (deliveryDate) => { this.setState({deliveryDate}) }
+    // With more than one param: onDeliveryDateChange = (deliveryDate, p2) => { this.setState({deliveryDate}) }
+
+    onDeliveryDateChange(deliveryDate){
+        this.setState({
+            deliveryDate: new Date(deliveryDate).toISOString().split('T')[0].split('-').reverse().join('/')
+        });
+    }
 
     onChangeClothType(e) {
         this.setState({
@@ -125,11 +134,12 @@ export default class CreateMeasurement extends Component {
         let data = {};
         data['name'] = this.state.name;
         data['contact'] = this.state.contact;
-        data['deliveryDate'] = this.state.deliveryDate.toISOString().split('T')[0];
+        data['deliveryDate'] = this.state.deliveryDate;
         data['date'] = new Date().toISOString().split('T')[0];
         this.measurements[this.state.clothType].forEach(m => data[m.key] = this.state[m.key]);
 
         console.log(data); // This is your final data to set
+        return;
 
         console.log(`Form submitted:`);
         let url = "";
@@ -172,9 +182,10 @@ export default class CreateMeasurement extends Component {
 
                 <div className="form-group">
                     <Calendar
-                        onChange={this.onDeliveryDateChange}
-                        value={this.state.calendarDate}
+                        onChange={this.onDeliveryDateChange.bind(this)}
+                        value={new Date()}
                     />
+                    <label>Date: {this.state.deliveryDate}</label>
                 </div>
 
                 <div className="form-group">
