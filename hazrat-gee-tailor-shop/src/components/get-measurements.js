@@ -82,6 +82,22 @@ export default class CreateMeasurement extends Component {
         }
     }
 
+    componentDidMount() {
+        if(this.props.match.params.id !== undefined)
+        {
+            axios.get('http://localhost:4000/cloth_measurement/' + this.props.match.params.id)
+                .then(response => {
+                    this.setState({
+                        name: response.data.name
+                    })
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+
+        }
+    }
+
     handleChange(key, type, e) {
         if (type === 'checkbox') {
             this.setState({
@@ -135,11 +151,11 @@ export default class CreateMeasurement extends Component {
         data['name'] = this.state.name;
         data['contact'] = this.state.contact;
         data['deliveryDate'] = this.state.deliveryDate;
-        data['date'] = new Date().toISOString().split('T')[0];
+        data['clothType'] = this.state.clothType;
+        data['date'] = new Date().toISOString().split('T')[0].split('-').reverse().join('/');
         this.measurements[this.state.clothType].forEach(m => data[m.key] = this.state[m.key]);
 
         console.log(data); // This is your final data to set
-        return;
 
         console.log(`Form submitted:`);
         let url = "";
@@ -185,6 +201,7 @@ export default class CreateMeasurement extends Component {
                         onChange={this.onDeliveryDateChange.bind(this)}
                         value={new Date()}
                     />
+                    <br/>
                     <label>Date: {this.state.deliveryDate}</label>
                 </div>
 

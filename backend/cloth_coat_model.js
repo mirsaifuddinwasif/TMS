@@ -2,6 +2,24 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let cloth_coat_model = new Schema({
+    jobId: {
+        type: String
+    },
+    name: {
+        type: String
+    },
+    contact: {
+        type: String
+    },
+    date: {
+        type: String
+    },
+    deliveryDate: {
+        type: String
+    },
+    clothType: {
+        type: String
+    },
     length: {
         type: String
     },

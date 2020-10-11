@@ -11,7 +11,7 @@ const Measurement = props => (
         <td>{props.measurement.deliveryDate}</td>
         <td>{props.measurement.clothType}</td>
         <td>
-            <Link to={"coat/edit/" + props.measurement._id}>Edit</Link>
+            <Link to={"pant/edit/" + props.measurement._id}>Edit</Link>
         </td>
         <td>
             <Link to={"/delete/" + props.measurement._id}>Delete</Link>
@@ -24,14 +24,14 @@ export default class MeasurementsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            measurement: [],
+            measurement: []
         };
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/cloth_measurement/coats')
+        axios.get('http://localhost:4000/cloth_measurement/pants')
             .then(response => {
-                this.setState({measurement: response.data});
+                this.setState({measurement: response.data})
             })
             .catch(function (error) {
                 console.log(error);
@@ -47,7 +47,7 @@ export default class MeasurementsList extends Component {
     render() {
         return (
             <div>
-                <h2>COATS</h2>
+                <h2>PANTS</h2>
                 <table className="table table-striped" style={{marginTop: 20}}>
                     <thead>
                     <tr>

@@ -19,12 +19,22 @@ connection.once('open', function () {
     console.log("MongoDB database connection established successfully");
 })
 
-cloth_measurementRoutes.route('/').get(function (req, res) {
+cloth_measurementRoutes.route('/coats').get(function (req, res) {
     cloth_coat_model.find(function (err, cloth_coat_model) {
         if (err) {
             console.log(err);
         } else {
             res.json(cloth_coat_model);
+        }
+    });
+});
+
+cloth_measurementRoutes.route('/pants').get(function (req, res) {
+    cloth_pant_model.find(function (err, cloth_pant_model) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(cloth_pant_model);
         }
     });
 });

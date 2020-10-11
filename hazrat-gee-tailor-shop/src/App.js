@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import getMeasurements from "./components/get-measurements";
 import EditMeasurement from "./components/edit-measurement.component";
 import MeasurementsList from "./components/measurements-list.component";
+import PantMeasurementsList from "./components/pant-measurements-list.component";
 
 import logo from "./logo.svg";
 
@@ -35,7 +36,8 @@ class App extends Component {
                     </nav>
                     <br/>
                     <Route path="/" exact component={MeasurementsList} />
-                    <Route path="/edit/:id" component={EditMeasurement} />
+                    <Route path="/" exact component={PantMeasurementsList} />
+                    <Route path="/edit/:id" component={getMeasurements} />
                     <Route path="/create" component={getMeasurements} />
                 </div>
             </Router>
